@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fyware | Plataforma E-Learning Interactiva</title>
+  <meta name="description" content="Plataforma e-learning interactiva desarrollada por Fyware. Experiencia inmersiva de entrenamiento industrial." />
+
+  <!-- DM Sans — tipografía oficial Fyware Brandbook 2026 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,300;1,9..40,400&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg:         #2B2E2E;
+      --border:     rgba(221,221,221,0.08);
+      --accent:     #E83833;
+      --accent-dim: rgba(232,56,51,0.10);
+      --white:      #DDDDDD;
+      --muted:      #9FA0A4;
+      --muted2:     #7a7b7f;
+      --font:       'DM Sans', sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--white);
+      font-family: var(--font);
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    body::after {
+      content: '';
+      position: fixed;
+      top: -15%;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 600px;
+      height: 360px;
+      background: radial-gradient(ellipse, rgba(232,56,51,0.04) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── HEADER ── */
+    header {
+      position: relative;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 26px 48px;
+      border-bottom: 1px solid var(--border);
+      animation: fadeDown 0.65s ease both;
+    }
+
+    .logo-link {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .logo-link img {
+      height: 26px;
+      width: auto;
+      display: block;
+      filter: brightness(0) invert(1);
+    }
+
+    .header-tag {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .header-tag::before {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 7px var(--accent);
+      animation: pulse 2.6s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.3; }
+    }
+
+    /* ── MAIN ── */
+    main {
+      position: relative;
+      z-index: 10;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 80px 24px 64px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-dim);
+      border: 1px solid rgba(232,56,51,0.22);
+      border-radius: 100px;
+      padding: 6px 16px;
+      margin-bottom: 32px;
+      animation: fadeUp 0.6s 0.08s ease both;
+    }
+
+    .hero-title {
+      font-family: var(--font);
+      font-size: clamp(38px, 6.5vw, 76px);
+      font-weight: 700;
+      line-height: 1.06;
+      letter-spacing: -0.015em;
+      text-align: center;
+      color: var(--white);
+      max-width: 760px;
+      margin-bottom: 18px;
+      animation: fadeUp 0.6s 0.16s ease both;
+    }
+
+    .hero-title em {
+      font-style: italic;
+      font-weight: 300;
+      color: var(--accent);
+    }
+
+    .hero-sub {
+      font-size: clamp(14px, 1.5vw, 16px);
+      color: var(--muted);
+      text-align: center;
+      max-width: 680px;
+      line-height: 1.7;
+      margin-bottom: 52px;
+      font-weight: 400;
+      animation: fadeUp 0.6s 0.24s ease both;
+    }
+
+    /* ── VIDEO ── */
+    .video-container {
+      width: 100%;
+      max-width: 900px;
+      position: relative;
+      animation: fadeUp 0.7s 0.34s ease both;
+    }
+
+    .video-frame {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      background: #000;
+      box-shadow:
+        0 0 0 1px rgba(232,56,51,0.07),
+        0 40px 90px rgba(0,0,0,0.65);
+      aspect-ratio: 16 / 9;
+    }
+
+    .video-frame iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+      display: block;
+    }
+
+    .video-frame::before,
+    .video-frame::after {
+      content: '';
+      position: absolute;
+      z-index: 2;
+      pointer-events: none;
+    }
+    .video-frame::before {
+      top: 0; left: 0;
+      width: 28px; height: 28px;
+      border-top: 2px solid var(--accent);
+      border-left: 2px solid var(--accent);
+      border-radius: 14px 0 0 0;
+    }
+    .video-frame::after {
+      bottom: 0; right: 0;
+      width: 28px; height: 28px;
+      border-bottom: 2px solid var(--accent);
+      border-right: 2px solid var(--accent);
+      border-radius: 0 0 14px 0;
+    }
+
+    /* ── META ROW ── */
+    .meta-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 36px;
+      animation: fadeUp 0.6s 0.44s ease both;
+    }
+
+    .meta-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 36px;
+      border-right: 1px solid var(--border);
+    }
+    .meta-item:last-child { border-right: none; }
+
+    .meta-label {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--muted2);
+      margin-bottom: 5px;
+    }
+
+    .meta-value {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--white);
+      letter-spacing: 0.02em;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      position: relative;
+      z-index: 10;
+      border-top: 1px solid var(--border);
+      padding: 22px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      animation: fadeDown 0.65s 0.48s ease both;
+    }
+
+    .footer-brand {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      color: var(--muted2);
+      text-transform: uppercase;
+    }
+    .footer-brand span { color: var(--white); }
+
+    .footer-copy { font-size: 11px; color: var(--muted2); }
+
+    .footer-link {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-link:hover { color: var(--accent); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(18px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      header  { padding: 18px 24px; }
+      main    { padding: 52px 16px 44px; }
+      footer  { flex-direction: column; text-align: center; padding: 18px 24px; gap: 8px; }
+      .meta-item { padding: 0 18px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <a class="logo-link" href="https://www.fyware.com" target="_blank" rel="noopener">
+      <img
+        src="https://raw.githubusercontent.com/OTFY/Plataforma-E-Learning/main/fyware-logo.svg"
+        alt="Fyware"
+        onerror="this.style.display='none';this.nextElementSibling.style.display='block';"
+      />
+      <span style="display:none;font-family:'DM Sans',sans-serif;font-size:17px;font-weight:700;letter-spacing:0.12em;color:#DDDDDD;text-transform:uppercase;">FYWARE</span>
+    </a>
+    <div class="header-tag">XR Industrial &nbsp;·&nbsp; Demostración de solución</div>
+  </header>
+
+  <!-- HERO + VIDEO -->
+  <main>
+
+    <div class="eyebrow">Producto · E-Learning</div>
+
+    <h1 class="hero-title">
+      Plataforma <em>E-Learning Interactiva</em>
+    </h1>
+
+    <p class="hero-sub">
+      Plataforma de Escenarios de Seguridad. Minijuego con cutscenes para Seguridad — experiencia interactiva basada en minijuegos y secuencias narrativas que refuerzan el aprendizaje del proceso correcto para trabajos en alturas, enfocada en la toma de decisiones y prevención de accidentes. Potencial a más desarrollos.
+    </p>
+
+    <div class="video-container">
+      <div class="video-frame">
+        <iframe
+          src="https://player.vimeo.com/video/1193706561?autoplay=0&title=0&byline=0&portrait=0&color=E83833"
+          allow="autoplay; fullscreen; picture-in-picture"
+          allowfullscreen
+          title="Fyware – Plataforma E-Learning Interactiva"
+        ></iframe>
+      </div>
+    </div>
+
+    <div class="meta-row">
+      <div class="meta-item">
+        <span class="meta-label">Producto</span>
+        <span class="meta-value">E-Learning</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Sector</span>
+        <span class="meta-value">Industrial</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Plataforma</span>
+        <span class="meta-value">Web / LMS</span>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-brand">Powered by <span>FYWARE</span> · fyware.com</div>
+    <div class="footer-copy">© 2025 Fyware. Todos los derechos reservados.</div>
+    <a class="footer-link" href="https://www.fyware.com" target="_blank" rel="noopener">www.fyware.com</a>
+  </footer>
+
+</body>
+</html>
